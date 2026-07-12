@@ -1,12 +1,11 @@
 import sys
+import logging
 sys.path.insert(0, '../')
 from planet_wars import issue_order
 
 
 def attack_weakest_enemy_planet(state):
-    # (1) If we currently have a fleet in flight, abort plan.
-    if len(state.my_fleets()) >= 1:
-        return False
+
 
     # (2) Find my strongest planet.
     strongest_planet = max(state.my_planets(), key=lambda t: t.num_ships, default=None)
@@ -23,9 +22,7 @@ def attack_weakest_enemy_planet(state):
 
 
 def spread_to_weakest_neutral_planet(state):
-    # (1) If we currently have a fleet in flight, just do nothing.
-    if len(state.my_fleets()) >= 1:
-        return False
+
 
     # (2) Find my strongest planet.
     strongest_planet = max(state.my_planets(), key=lambda p: p.num_ships, default=None)

@@ -24,6 +24,8 @@ from planet_wars import PlanetWars, finish_turn
 def setup_behavior_tree():
 
     # Top-down construction of behavior tree
+
+    #
     root = Selector(name='High Level Ordering of Strategies')
 
     offensive_plan = Sequence(name='Offensive Strategy')
