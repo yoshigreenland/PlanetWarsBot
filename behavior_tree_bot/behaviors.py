@@ -35,11 +35,11 @@ def spread_to_weakest_neutral_planet(state):
     strongest_planet = max(state.my_planets(), key=lambda p: p.num_ships, default=None)
 
     # (3) Find the weakest neutral planet.
-    weakest_planet = min(available_targets, key=lambda p: p.num_ships, default=None)
+    ideal_target = max(available_targets, key=lambda p: p.growth_rate / (max(p.num_ships, 1) * max(state.distance(strongest_planet.ID, p.ID), 1)), default=None)
 
-    if not strongest_planet or not weakest_planet or strongest_planet.num_ships/2 < weakest_planet.num_ships:
+    if not strongest_planet or not ideal_target or strongest_planet.num_ships/2 < ideal_target.num_ships:
         # No legal source or destination
         return False
     else:
         # (4) Send half the ships from my strongest planet to the weakest neutral planet.
-        return issue_order(state, strongest_planet.ID, weakest_planet.ID, weakest_planet.num_ships + 1)
+        return issue_order(state, strongest_planet.ID, ideal_target.ID, ideal_target.num_ships + 1)
