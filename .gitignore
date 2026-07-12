@@ -1,0 +1,6 @@
+*
+!*/
+!behavior_tree_bot/
+!behavior_tree_bot/**
+!.gitignore
+!README.md
